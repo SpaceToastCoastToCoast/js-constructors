@@ -8,8 +8,26 @@
  * @property {string} name
  * @property {number} cost
  * @property {string} description
- * @method   printDetails
+ * @method   getDetails
  */
+
+function Spell(name, cost, description) {
+
+  if(typeof name === 'string' || name instanceof String) {
+    this.name = name;
+  } else {
+    throw new TypeError('name must be a String');
+  }
+  if(typeof cost === 'number' || cost instanceof Number) {
+    this.cost = cost;
+  } else {
+    throw new TypeError('cost must be a Number');
+  }
+  if(typeof description === 'string' || description instanceof String) {
+    this.description = description;
+  } else {
+    throw new TypeError('description must be a String');
+  }
 
   /**
    * Returns a string of all of the spell's details.
@@ -18,6 +36,12 @@
    * @name getDetails
    * @return {string} details containing all of the spells information.
    */
+  this.getDetails = function() {
+    return 'Spell Name: ' + this.name + 'Cost: ' +
+      this.cost +  'MP' + 'Description: ' + this.description;
+  };
+
+}
 
 /**
  * A spell that deals damage.
