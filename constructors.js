@@ -37,8 +37,8 @@ function Spell(name, cost, description) {
    * @return {string} details containing all of the spells information.
    */
   this.getDetails = function() {
-    return 'Spell Name: ' + this.name + 'Cost: ' +
-      this.cost +  'Mana' + 'Description: ' + this.description;
+    return ('Spell Name: ' + this.name + ' Cost: ' +
+      this.cost +  'Mana ' + 'Description: ' + this.description);
   };
 
 }
@@ -182,8 +182,17 @@ function Spellcaster(name, health, mana) {
    * @param  {Spellcaster} target         The spell target to be inflicted.
    * @return {boolean}                    Whether the spell was successfully cast.
    */
-  this.invoke = function() {
-    return false;
+  this.invoke = function(spell, target) {
+    if(spell instanceof Spell) {
+      if(spell instanceof DamageSpell) {
+        if(!(target instanceof Spellcaster)) {
+          return false;
+        }
+      }
+    } else {
+      return false;
+    }
+    return this.spendMana(spell.cost);
   };
 
 }
