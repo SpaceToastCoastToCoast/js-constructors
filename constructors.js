@@ -187,6 +187,12 @@ function Spellcaster(name, health, mana) {
       if(spell instanceof DamageSpell) {
         if(!(target instanceof Spellcaster)) {
           return false;
+        } else {
+          if(this.spendMana(spell.cost)) {
+            target.inflictDamage(spell.damage);
+            return true;
+          }
+          return this.spendMana(spell.cost);
         }
       }
     } else {
