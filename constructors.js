@@ -143,6 +143,10 @@ function Spellcaster(name, health, mana) {
    */
 
   this.spendMana = function(cost) {
+    if(cost <= this.mana) {
+      this.mana -= cost;
+      return true;
+    }
     return false;
   };
 
