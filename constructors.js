@@ -38,7 +38,7 @@ function Spell(name, cost, description) {
    */
   this.getDetails = function() {
     return 'Spell Name: ' + this.name + 'Cost: ' +
-      this.cost +  'MP' + 'Description: ' + this.description;
+      this.cost +  'Mana' + 'Description: ' + this.description;
   };
 
 }
@@ -70,7 +70,11 @@ function Spell(name, cost, description) {
 
 function DamageSpell(name, cost, damage, description) {
   Spell.call(this, name, cost, description);
-  this.damage = damage;
+  if(typeof damage === 'number' || damage instanceof Number) {
+    this.damage = damage;
+  } else {
+    throw new TypeError('damage must be a Number');
+  }
 }
 
 DamageSpell.prototype = Object.create(Spell.prototype);
@@ -91,6 +95,29 @@ DamageSpell.prototype = Object.create(Spell.prototype);
  * @method  spendMana
  * @method  invoke
  */
+
+function Spellcaster(name, health, mana) {
+  if(typeof name === 'string' || name instanceof String) {
+    this.name = name;
+  } else {
+    throw new TypeError('name must be a String');
+  }
+  if(typeof health === 'number' || health instanceof Number) {
+    if(health > 0) {
+      this.health = health;
+    } else {
+      throw new RangeError('health must be a Number greater than zero');
+    }
+  } else {
+    throw new TypeError('health must be a Number greater than zero');
+  }
+  if(typeof mana === 'number' || mana instanceof Number) {
+    this.mana = mana;
+  } else {
+    throw new TypeError('mana must be a Number');
+  }
+  this.isAlive = true;
+}
 
   /**
    * @method inflictDamage
